@@ -179,11 +179,13 @@ The PhiGraph library currently includes the following algorithms for graph machi
 
 ## Installation
 
+
 PhiGraph is a Python 3 library. We recommend using the latest available version of Python 3.
 The required Python interpreter can be downloaded from [python.org](https://python.org/), or use the
 Anaconda Python environment from [anaconda.com](https://www.anaconda.com/products/individual#Downloads).
 
 The PhiGraph library can be installed from PyPI, from Anaconda Cloud, or directly from GitHub, as described below.
+
 
 #### Install PhiGraph using PyPI:
 To install PhiGraph library from [PyPI](https://pypi.org) using `pip`, execute the following command:
