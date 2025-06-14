@@ -67,6 +67,20 @@ class GraphAttentionTransformer(layers.Layer):
         self.dropout = layers.Dropout(in_dropout_rate)
         super().__init__(**kwargs)
 
+
+    def build(self, input_shapes):
+        # delegate building to the internal GAT layer
+        self.gat.build(input_shapes)
+        self.built = True
+
+    def compute_output_shape(self, input_shapes):
+        gat_shape = self.gat.compute_output_shape(input_shapes)
+        out_dim = gat_shape[-1]
+        if isinstance(self.aggregator, str) and self.aggregator == "concat":
+            out_dim *= 2
+        return (gat_shape[0], gat_shape[1], out_dim)
+
+
     def _set_agg_fn(self, agg):
         if isinstance(agg, str):
             if agg == "add":
