@@ -76,18 +76,20 @@ class GraphAttentionTransformer(layers.Layer):
         self.built = True
 
     def compute_output_shape(self, input_shapes):
-        gat_shape = self.gat.compute_output_shape(input_shapes)
-        out_dim = gat_shape[-1]
+        """
+        Computes the output shape of the layer.
+        Assumes the following inputs:
 
-        if isinstance(self.aggregator, str):
-            if self.aggregator == "concat":
-                out_dim *= 2
-        else:
-            # determine the final dimension by applying the aggregator
-            dummy = tf.zeros((1, 1, out_dim))
-            out_dim = self._agg_fn(dummy, dummy).shape[-1]
+        Args:
+            input_shapes (tuple of int)
+                Shape tuples can include None for free dimensions, instead of an integer.
 
-        return (gat_shape[0], gat_shape[1], out_dim)
+        Returns:
+            An input shape tuple.
+        """
+        feature_shape = input_shapes
+
+        return feature_shape[0], feature_shape[1], self.units
 
     def _set_agg_fn(self, agg):
         if isinstance(agg, str):
