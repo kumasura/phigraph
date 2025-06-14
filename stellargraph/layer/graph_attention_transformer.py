@@ -21,7 +21,10 @@ class GraphAttentionTransformer(layers.Layer):
 
     The ``aggregator`` argument can be a string identifying one of the builtin
     aggregation methods (``"add"``, ``"mean"`` or ``"concat"``) or a custom
-    callable that combines two tensors ``(gat_out, transformer_out)``.
+    callable that combines two tensors ``(gat_out, transformer_out)``. When a
+    callable is supplied, :meth:`compute_output_shape` infers the final feature
+    dimension by applying the aggregator to dummy tensors of the GAT output
+    shape.
     """
 
     def __init__(
@@ -76,8 +79,15 @@ class GraphAttentionTransformer(layers.Layer):
     def compute_output_shape(self, input_shapes):
         gat_shape = self.gat.compute_output_shape(input_shapes)
         out_dim = gat_shape[-1]
-        if isinstance(self.aggregator, str) and self.aggregator == "concat":
-            out_dim *= 2
+
+        if isinstance(self.aggregator, str):
+            if self.aggregator == "concat":
+                out_dim *= 2
+        else:
+            # determine the final dimension by applying the aggregator
+            dummy = tf.zeros((1, 1, out_dim))
+            out_dim = self._agg_fn(dummy, dummy).shape[-1]
+
         return (gat_shape[0], gat_shape[1], out_dim)
 
 
