@@ -56,8 +56,5 @@ class TestGraphAttentionTransformer:
         x_inp = self.get_inputs()
         out = layer(x_inp)
         assert out.shape.as_list() == [1, self.N, 3]
-        assert (
-            layer.compute_output_shape([t.shape for t in x_inp])
-            == (1, self.N, 3)
-        )
+        assert layer.compute_output_shape([t.shape for t in x_inp]) == (1, self.N, 3)
 
