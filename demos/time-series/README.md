@@ -9,6 +9,7 @@ These demos are displayed with detailed descriptions in the documentation: https
 |---|---|
 | [Forecasting using spatio-temporal data with combined Graph Convolution + LSTM model](https://stellargraph.readthedocs.io/en/stable/demos/time-series/gcn-lstm-time-series.html) | [source](gcn-lstm-time-series.ipynb) |
 | [Forecasting with GAT + Transformer](https://stellargraph.readthedocs.io/en/stable/demos/time-series/gat-transformer-time-series.html) | [source](gat-transformer-time-series.ipynb) |
+| [Forecasting with Kalman GAT + Transformer](https://stellargraph.readthedocs.io/en/stable/demos/time-series/kalman-gat-transformer-time-series.html) | [source](kalman-gat-transformer-time-series.ipynb) |
 
 The demo titles link to the latest, nicely rendered version. The 'source' links will open the demo in the application in which this README is being viewed, such as Jupyter Lab (ready for execution).
 
