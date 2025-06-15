@@ -43,3 +43,4 @@ from .sort_pooling import *
 from .gcn_lstm import *
 from .graph_attention_transformer import *
 from .gat_transformer import *
+from .kalman_gat_transformer import *
