@@ -13,7 +13,11 @@ def get_timeseries_graph_data():
 
 def test_kalman_gat_transformer_model():
     fx, fy, a = get_timeseries_graph_data()
-    model_layer = KalmanGATTransformer(seq_len=fx.shape[-1], adj=a, gat_layer_sizes=[2], transformer_layers=1)
+
+    model_layer = KalmanGATTransformer(
+        seq_len=fx.shape[-1], adj=a, gat_layer_sizes=[2], transformer_layers=1
+    )
+
     x_input, x_output = model_layer.in_out_tensors()
     model = Model(inputs=x_input, outputs=x_output)
     model.compile(optimizer="adam", loss="mae")
